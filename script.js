@@ -238,3 +238,16 @@ languageSelect.addEventListener('change', (e) => {
     
     myChart.update();
 });
+
+const currencySelect = document.getElementById('currencySelect');
+const currencyDisplays = document.querySelectorAll('.currencyDisplay');
+
+const currencySymbols = {
+    usd: "$",
+    eur: "€"
+};
+
+currencySelect.addEventListener('change', (e) => {
+    const symbol = currencySymbols[e.target.value];
+    currencyDisplays.forEach(el => el.textContent = symbol);
+});
