@@ -14,6 +14,47 @@ const leadsPortion = rawData.map(d => d.leads - d.customers);
 const prospectsPortion = rawData.map(d => d.prospects - d.leads);
 const labels = rawData.map(d => d.month);
 
+let currentLang = 'en';
+const translations = {
+    en: {
+        language: "Language",
+        currency: "Currency",
+        campaignStart: "Campaign Start",
+        campaignEnd: "Campaign End",
+        totalRevenue: "Total Revenue",
+        avgOrderValue: "Avg. Order Value",
+        prospects: "Prospects",
+        leads: "Leads",
+        customers: "Customers",
+        leadResponseRate: "Lead Response Rate",
+        prospectResponseRate: "Prospect Response Rate",
+        people: "people",
+        months: "Months",
+        monthLabel: "Month #"
+    },
+    bg: {
+        language: "Език",
+        currency: "Валута",
+        campaignStart: "Начало на кампания",
+        campaignEnd: "Край на кампания",
+        totalRevenue: "Общи приходи",
+        avgOrderValue: "Ср. стойност на поръчка",
+        prospects: "Контакти",
+        leads: "Потенциални клиенти",
+        customers: "Клиенти",
+        leadResponseRate: "Процент на отговор от потенциални клиенти",
+        prospectResponseRate: "Процент на отговор от контакти",
+        people: "души",
+        months: "Месеци",
+        monthLabel: "Месец №"
+    }
+};
+
+const flags = {
+    en: "🇺🇸",
+    bg: "🇧🇬"
+};
+
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -58,7 +99,7 @@ const myChart = new Chart(ctx, {
                     color: '#94a3b8',
                     stepSize: 20,
                     callback: function(value) {
-                        return value + ' people';
+                        return value + ' ' + translations[currentLang].people;
                     },
                     font: {
                         size: 10
@@ -107,7 +148,7 @@ const myChart = new Chart(ctx, {
                 padding: 10,
                 callbacks: {
                     title: function(context) {
-                        return 'Month #' + context[0].label;
+                        return translations[currentLang].monthLabel + context[0].label;
                     },
                     label: function() {
                         return ''; // Hide default labels
@@ -116,9 +157,9 @@ const myChart = new Chart(ctx, {
                         const index = context[0].dataIndex;
                         const data = rawData[index];
                         return [
-                            `Prospects: ${data.prospects}`,
-                            `Leads: ${data.leads}`,
-                            `Customers: ${data.customers}`
+                            `${translations[currentLang].prospects}: ${data.prospects}`,
+                            `${translations[currentLang].leads}: ${data.leads}`,
+                            `${translations[currentLang].customers}: ${data.customers}`
                         ];
                     }
                 }
@@ -171,3 +212,29 @@ avgOrderValueInput.addEventListener('input', calculateMetrics);
 
 // Initial calculation on load
 calculateMetrics();
+
+const languageSelect = document.getElementById('languageSelect');
+const languageFlag = document.getElementById('languageFlag');
+
+languageSelect.addEventListener('change', (e) => {
+    currentLang = e.target.value;
+    languageFlag.textContent = flags[currentLang];
+    
+    // Update HTML labels
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+            el.textContent = translations[currentLang][key];
+        }
+    });
+
+    // Update Chart datasets
+    myChart.data.datasets[0].label = translations[currentLang].customers;
+    myChart.data.datasets[1].label = translations[currentLang].leads;
+    myChart.data.datasets[2].label = translations[currentLang].prospects;
+    
+    // Update Chart axes
+    myChart.options.scales.y.title.text = translations[currentLang].months;
+    
+    myChart.update();
+});
