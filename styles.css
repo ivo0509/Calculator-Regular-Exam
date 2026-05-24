@@ -1,17 +1,12 @@
 :root {
-    --bg-main: #0b1120;
-    --bg-panel: rgba(30, 41, 59, 0.65);
+    --bg-main: #141b2a;
+    --bg-panel: #1a2332;
     --text-main: #fff;
     --text-muted: #94a3b8;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --card-prospects: linear-gradient(135deg, #1d4ed8, #3b82f6);
-    --card-leads: linear-gradient(135deg, #6d28d9, #8b5cf6);
-    --card-customers: linear-gradient(135deg, #047857, #10b981);
-}
-
-@keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(30px) scale(0.98); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+    --border-color: #2e3c54;
+    --card-prospects: #838c9c;
+    --card-leads: #aeb4c0;
+    --card-customers: #cdd1d8;
 }
 
 * {
@@ -23,7 +18,6 @@
 
 body {
     background-color: var(--bg-main);
-    background-image: radial-gradient(circle at top left, #1e293b, transparent 60%);
     color: var(--text-main);
     display: flex;
     justify-content: center;
@@ -37,7 +31,6 @@ body {
     gap: 20px;
     width: 100%;
     max-width: 1100px;
-    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Custom Select Dropdown */
@@ -52,17 +45,12 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: #1e293b;
-    border: 1px solid #334155;
+    background-color: #232d3f;
+    border: 1px solid #36445d;
     border-radius: 6px;
     padding: 8px 12px;
     cursor: pointer;
     color: var(--text-main);
-    transition: all 0.3s ease;
-}
-.custom-select.open .custom-select__selected {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 .custom-select__selected .fi {
@@ -87,19 +75,13 @@ body {
     top: calc(100% + 4px);
     left: 0;
     right: 0;
-    background-color: #1e293b;
-    border: 1px solid #334155;
+    background-color: #232d3f;
+    border: 1px solid #36445d;
     border-radius: 6px;
     list-style: none;
     z-index: 100;
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-    animation: fadeInDown 0.2s ease forwards;
-}
-
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 .custom-select.open .custom-select__options {
@@ -113,11 +95,11 @@ body {
     padding: 9px 12px;
     cursor: pointer;
     color: var(--text-main);
-    transition: background 0.2s;
+    transition: background 0.15s;
 }
 
 .custom-select__option:hover {
-    background-color: #3b82f6;
+    background-color: #2e3c54;
 }
 
 .custom-select__option .fi {
@@ -159,19 +141,13 @@ body {
 }
 
 .form-group-container {
-    background: var(--bg-panel);
-    backdrop-filter: blur(12px);
+    background-color: var(--bg-panel);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.form-group-container:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .form-group {
@@ -188,46 +164,31 @@ body {
 
 select, input[type="date"], input[type="number"] {
     width: 100%;
-    background-color: #1e293b;
-    border: 1px solid #334155;
+    background-color: #232d3f;
+    border: 1px solid #36445d;
     color: var(--text-main);
     padding: 8px 12px;
     border-radius: 6px;
     outline: none;
     font-size: 14px;
-    transition: all 0.3s ease;
-}
-select:focus, input[type="date"]:focus, input[type="number"]:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 select option {
-    background-color: #1e293b;
+    background-color: #232d3f;
     color: var(--text-main);
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
     opacity: 0.6;
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
-input[type="date"]::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
 }
 
 .select-wrapper, .input-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    background-color: #1e293b;
-    border: 1px solid #334155;
+    background-color: #232d3f;
+    border: 1px solid #36445d;
     border-radius: 6px;
     padding: 0 12px;
-    transition: all 0.3s ease;
-}
-.select-wrapper:focus-within, .input-wrapper:focus-within {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 .select-wrapper .flag {
     margin-right: 5px;
@@ -261,17 +222,11 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 /* Chart */
 .chart-container {
     flex: 2;
-    background: var(--bg-panel);
-    backdrop-filter: blur(12px);
+    background-color: var(--bg-panel);
     border-radius: 12px;
     padding: 20px;
     border: 1px solid var(--border-color);
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.chart-container:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Cards */
@@ -290,32 +245,11 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     gap: 10px;
     flex: 1; /* Stretch cards evenly */
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background-size: 200% 200%;
-    border: 1px solid var(--border-color);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    background-position: right bottom;
-}
-.card:hover::before {
-    opacity: 1;
-}
-
-.card-prospects { background: var(--card-prospects); }
-.card-leads { background: var(--card-leads); }
-.card-customers { background: var(--card-customers); }
+.card-prospects { background-color: var(--card-prospects); }
+.card-leads { background-color: var(--card-leads); }
+.card-customers { background-color: var(--card-customers); color: #333; }
+.card-customers .card-header .icon i { color: #333; }
 
 .card-header {
     display: flex;
@@ -339,37 +273,31 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
 }
 
 .progress-bar {
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
     overflow: hidden;
     margin-top: 5px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
 }
+.card-prospects .progress-bar { background-color: rgba(255, 255, 255, 0.3); }
+.card-leads .progress-bar { background-color: rgba(255, 255, 255, 0.3); }
+.card-customers .progress-bar { background-color: rgba(255, 255, 255, 0.4); }
 
 .progress-bar .progress {
     height: 100%;
     background-color: #fff;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 5px;
 }
 
 /* Sliders */
 .sliders-section {
-    background: var(--bg-panel);
-    backdrop-filter: blur(12px);
+    background-color: var(--bg-panel);
     border-radius: 12px;
     padding: 25px;
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     gap: 25px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.sliders-section:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .slider-group {
@@ -419,10 +347,5 @@ input[type=range]::-webkit-slider-thumb {
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5), 0 0 10px rgba(255, 255, 255, 0.3);
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
-}
-input[type=range]::-webkit-slider-thumb:hover {
-    transform: scale(1.3);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
 }

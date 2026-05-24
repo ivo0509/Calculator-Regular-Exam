@@ -63,34 +63,27 @@ const myChart = new Chart(ctx, {
             {
                 label: 'Customers',
                 data: customersData,
-                backgroundColor: '#10b981',
+                backgroundColor: '#cdd1d8',
                 barPercentage: 0.9,
-                categoryPercentage: 0.95,
-                borderRadius: 4
+                categoryPercentage: 0.95
             },
             {
                 label: 'Leads',
                 data: leadsPortion,
-                backgroundColor: '#8b5cf6',
+                backgroundColor: '#aeb4c0',
                 barPercentage: 0.9,
-                categoryPercentage: 0.95,
-                borderRadius: 4
+                categoryPercentage: 0.95
             },
             {
                 label: 'Prospects',
                 data: prospectsPortion,
-                backgroundColor: '#3b82f6',
+                backgroundColor: '#838c9c',
                 barPercentage: 0.9,
-                categoryPercentage: 0.95,
-                borderRadius: 4
+                categoryPercentage: 0.95
             }
         ]
     },
     options: {
-        animation: {
-            duration: 800,
-            easing: 'easeOutQuart'
-        },
         indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
@@ -182,31 +175,9 @@ const prospectRateVal = document.getElementById('prospectRateVal');
 
 const totalRevenueInput = document.getElementById('totalRevenue');
 const avgOrderValueInput = document.getElementById('avgOrderValue');
-
-const prospectsPctDisplay = document.getElementById('prospectsPct');
-const leadsPctDisplay = document.getElementById('leadsPct');
-const customersPctDisplay = document.getElementById('customersPct');
-
-const prospectsProgress = document.getElementById('prospectsProgress');
-const leadsProgress = document.getElementById('leadsProgress');
-const customersProgress = document.getElementById('customersProgress');
-
 const prospectsValueDisplay = document.getElementById('prospectsValue');
 const leadsValueDisplay = document.getElementById('leadsValue');
 const customersValueDisplay = document.getElementById('customersValue');
-
-function animateValue(obj, start, end, duration) {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.textContent = Math.floor(progress * (end - start) + start);
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
 
 function calculateMetrics() {
     const totalRevenue = parseFloat(totalRevenueInput.value) || 0;
@@ -221,23 +192,9 @@ function calculateMetrics() {
     // Formula 03
     const prospects = Math.round((leads * 100) / prospectResponseRate);
 
-    // Update Progress Bars & Percentages
-    const maxVal = prospects > 0 ? prospects : 1;
-    const leadsPct = ((leads / maxVal) * 100).toFixed(0);
-    const customersPct = ((customers / maxVal) * 100).toFixed(0);
-
-    prospectsPctDisplay.textContent = '100%';
-    leadsPctDisplay.textContent = leadsPct + '%';
-    customersPctDisplay.textContent = customersPct + '%';
-
-    prospectsProgress.style.width = '100%';
-    leadsProgress.style.width = leadsPct + '%';
-    customersProgress.style.width = customersPct + '%';
-
-    // Animate numbers
-    animateValue(customersValueDisplay, parseInt(customersValueDisplay.textContent) || 0, customers, 800);
-    animateValue(leadsValueDisplay, parseInt(leadsValueDisplay.textContent) || 0, leads, 800);
-    animateValue(prospectsValueDisplay, parseInt(prospectsValueDisplay.textContent) || 0, prospects, 800);
+    customersValueDisplay.textContent = customers;
+    leadsValueDisplay.textContent = leads;
+    prospectsValueDisplay.textContent = prospects;
 }
 
 leadRate.addEventListener('input', (e) => {
