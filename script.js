@@ -129,12 +129,45 @@ const myChart = new Chart(ctx, {
 
 const leadRate = document.getElementById('leadRate');
 const leadRateVal = document.getElementById('leadRateVal');
-leadRate.addEventListener('input', (e) => {
-    leadRateVal.textContent = parseFloat(e.target.value).toFixed(2) + '%';
-});
-
 const prospectRate = document.getElementById('prospectRate');
 const prospectRateVal = document.getElementById('prospectRateVal');
+
+const totalRevenueInput = document.getElementById('totalRevenue');
+const avgOrderValueInput = document.getElementById('avgOrderValue');
+const prospectsValueDisplay = document.getElementById('prospectsValue');
+const leadsValueDisplay = document.getElementById('leadsValue');
+const customersValueDisplay = document.getElementById('customersValue');
+
+function calculateMetrics() {
+    const totalRevenue = parseFloat(totalRevenueInput.value) || 0;
+    const avgOrderValue = parseFloat(avgOrderValueInput.value) || 1; 
+    const leadResponseRate = parseFloat(leadRate.value) || 1;
+    const prospectResponseRate = parseFloat(prospectRate.value) || 1;
+
+    // Formula 01
+    const customers = Math.round(totalRevenue / avgOrderValue);
+    // Formula 02
+    const leads = Math.round((customers * 100) / leadResponseRate);
+    // Formula 03
+    const prospects = Math.round((leads * 100) / prospectResponseRate);
+
+    customersValueDisplay.textContent = customers;
+    leadsValueDisplay.textContent = leads;
+    prospectsValueDisplay.textContent = prospects;
+}
+
+leadRate.addEventListener('input', (e) => {
+    leadRateVal.textContent = parseFloat(e.target.value).toFixed(2) + '%';
+    calculateMetrics();
+});
+
 prospectRate.addEventListener('input', (e) => {
     prospectRateVal.textContent = parseFloat(e.target.value).toFixed(2) + '%';
+    calculateMetrics();
 });
+
+totalRevenueInput.addEventListener('input', calculateMetrics);
+avgOrderValueInput.addEventListener('input', calculateMetrics);
+
+// Initial calculation on load
+calculateMetrics();
