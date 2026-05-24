@@ -213,30 +213,56 @@ avgOrderValueInput.addEventListener('input', calculateMetrics);
 // Initial calculation on load
 calculateMetrics();
 
-const languageSelect = document.getElementById('languageSelect');
 const languageFlag = document.getElementById('languageFlag');
 
-languageSelect.addEventListener('change', (e) => {
-    currentLang = e.target.value;
-    languageFlag.textContent = flags[currentLang];
-    
-    // Update HTML labels
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-            el.textContent = translations[currentLang][key];
-        }
-    });
+// Custom language dropdown
+const languageDropdown = document.getElementById('languageDropdown');
+const languageSelected = document.getElementById('languageSelected');
+const languageOptions = document.getElementById('languageOptions');
 
-    // Update Chart datasets
-    myChart.data.datasets[0].label = translations[currentLang].customers;
-    myChart.data.datasets[1].label = translations[currentLang].leads;
-    myChart.data.datasets[2].label = translations[currentLang].prospects;
-    
-    // Update Chart axes
-    myChart.options.scales.y.title.text = translations[currentLang].months;
-    
-    myChart.update();
+const langFlagMap = { en: 'fi-us', bg: 'fi-bg' };
+const langLabelMap = { en: 'English', bg: 'Български' };
+
+languageSelected.addEventListener('click', () => {
+    languageDropdown.classList.toggle('open');
+});
+
+document.addEventListener('click', (e) => {
+    if (!languageDropdown.contains(e.target)) {
+        languageDropdown.classList.remove('open');
+    }
+});
+
+languageOptions.querySelectorAll('.custom-select__option').forEach(option => {
+    option.addEventListener('click', () => {
+        currentLang = option.dataset.value;
+
+        // Update the selected display
+        languageSelected.innerHTML = `
+            <span class="fi ${langFlagMap[currentLang]}"></span>
+            <span class="custom-select__label">${langLabelMap[currentLang]}</span>
+            <span class="custom-select__arrow">&#8597;</span>
+        `;
+        languageDropdown.classList.remove('open');
+
+        // Update HTML labels
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+
+        // Update Chart datasets
+        myChart.data.datasets[0].label = translations[currentLang].customers;
+        myChart.data.datasets[1].label = translations[currentLang].leads;
+        myChart.data.datasets[2].label = translations[currentLang].prospects;
+
+        // Update Chart axes
+        myChart.options.scales.y.title.text = translations[currentLang].months;
+
+        myChart.update();
+    });
 });
 
 const currencySelect = document.getElementById('currencySelect');
