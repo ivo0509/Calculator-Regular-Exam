@@ -1,0 +1,258 @@
+:root {
+    --bg-main: #141b2a;
+    --bg-panel: #1a2332;
+    --text-main: #fff;
+    --text-muted: #94a3b8;
+    --border-color: #2e3c54;
+    --card-prospects: #838c9c;
+    --card-leads: #aeb4c0;
+    --card-customers: #cdd1d8;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-muted);
+    padding: 5px;
+}
+
+.form-group-container {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+select, input[type="date"], input[type="number"] {
+    width: 100%;
+    background-color: #232d3f;
+    border: 1px solid #36445d;
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.6;
+}
+
+.select-wrapper, .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #232d3f;
+    border: 1px solid #36445d;
+    border-radius: 6px;
+    padding: 0 12px;
+}
+.select-wrapper .flag {
+    margin-right: 5px;
+}
+.select-wrapper select, .input-wrapper input {
+    border: none;
+    padding: 8px 0;
+    background: transparent;
+    flex: 1;
+}
+
+.currency-symbol {
+    color: var(--text-muted);
+    margin-right: 5px;
+}
+
+/* Main Content */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.top-section {
+    display: flex;
+    gap: 20px;
+    height: 420px; /* Force height so chart and cards fit nicely */
+}
+
+/* Chart */
+.chart-container {
+    flex: 2;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+/* Cards */
+.stats-cards {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.card {
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1; /* Stretch cards evenly */
+    justify-content: center;
+}
+.card-prospects { background-color: var(--card-prospects); }
+.card-leads { background-color: var(--card-leads); }
+.card-customers { background-color: var(--card-customers); color: #333; }
+.card-customers .card-header .icon i { color: #333; }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: 500;
+}
+.card-header .percentage {
+    margin-left: auto;
+    font-weight: 600;
+}
+.card .value {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+}
+.card-customers .value {
+    color: #fff; /* Even the lightest card has white text in the example */
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+.card-prospects .progress-bar { background-color: rgba(255, 255, 255, 0.3); }
+.card-leads .progress-bar { background-color: rgba(255, 255, 255, 0.3); }
+.card-customers .progress-bar { background-color: rgba(255, 255, 255, 0.4); }
+
+.progress-bar .progress {
+    height: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* Sliders */
+.sliders-section {
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.slider-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.slider-group label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.slider-track-wrap {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 0;
+}
+
+.slider-val {
+    align-self: flex-end;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #475569;
+    border-radius: 4px;
+}
+input[type=range]::-webkit-slider-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
