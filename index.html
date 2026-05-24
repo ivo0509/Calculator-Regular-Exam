@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeadPredictor</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
 </head>
 <body>
     <div class="container">
@@ -20,12 +21,22 @@
             <div class="form-group-container">
                 <div class="form-group">
                     <label data-i18n="language">Language</label>
-                    <div class="select-wrapper">
-                        <span class="flag" id="languageFlag">🇺🇸</span>
-                        <select id="languageSelect">
-                            <option value="en">English</option>
-                            <option value="bg">Български</option>
-                        </select>
+                    <div class="custom-select" id="languageDropdown">
+                        <div class="custom-select__selected" id="languageSelected">
+                            <span class="fi fi-us"></span>
+                            <span class="custom-select__label">English</span>
+                            <span class="custom-select__arrow">&#8597;</span>
+                        </div>
+                        <ul class="custom-select__options" id="languageOptions">
+                            <li class="custom-select__option" data-value="en">
+                                <span class="fi fi-us"></span>
+                                <span>English</span>
+                            </li>
+                            <li class="custom-select__option" data-value="bg">
+                                <span class="fi fi-bg"></span>
+                                <span>Български</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
